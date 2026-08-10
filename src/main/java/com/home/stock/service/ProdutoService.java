@@ -23,7 +23,8 @@ public class ProdutoService {
                 produto.getNome(),
                 produto.getCategoria(),
                 produto.getUnidadeMedida(),
-                produto.getEstoqueMinimo()
+                produto.getEstoqueMinimo(),
+                produto.getQuantidadeEstoque()
         );
     }
 

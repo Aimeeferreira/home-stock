@@ -82,7 +82,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProdutoNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProdutoNotFound(
+    public ResponseEntity<ErrorResponse> handleProdutoNotFoundException(
             ProdutoNotFoundException exception
     ) {
         ErrorResponse response = new ErrorResponse(
@@ -92,6 +92,20 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
+                .body(response);
+    }
+
+    @ExceptionHandler(InsufficientStockException.class)
+    public ResponseEntity<ErrorResponse> handleInsufficientStockException(
+            InsufficientStockException exception
+    ) {
+        ErrorResponse response = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                exception.getMessage()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .body(response);
     }
 }

@@ -27,4 +27,7 @@ public class Produto {
     private UnidadeMedida unidadeMedida;
 
     private BigDecimal estoqueMinimo;
+
+    @Column(nullable = false)
+    private BigDecimal quantidadeEstoque = BigDecimal.ZERO;
 }

@@ -10,6 +10,7 @@ public record ProdutoResponse(
         String nome,
         CategoriaProduto categoria,
         UnidadeMedida unidadeMedida,
-        BigDecimal estoqueMinimo
+        BigDecimal estoqueMinimo,
+        BigDecimal quantidadeEstoque
 ) {
 }
