@@ -27,7 +27,6 @@ Nesse contexto, o HomeStock busca transformar o estoque doméstico em uma ferram
 - planeje compras antes de períodos de maior risco;
 - futuramente receba recomendações baseadas em dados históricos e fatores externos.
 
-----
 ## 🛠️ Tecnologias
 
 - Java 21
