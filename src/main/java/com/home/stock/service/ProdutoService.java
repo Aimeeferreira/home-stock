@@ -1,9 +1,13 @@
 package com.home.stock.service;
 
 import com.home.stock.dto.request.ProdutoRequest;
+import com.home.stock.dto.response.CategoriaResponse;
 import com.home.stock.dto.response.ProdutoResponse;
+import com.home.stock.entity.Categoria;
 import com.home.stock.entity.Produto;
-import com.home.stock.exception.ProdutoNotFoundException;
+import com.home.stock.exception.CategoryNotFoundException;
+import com.home.stock.exception.ProductNotFoundException;
+import com.home.stock.repository.CategoriaRepository;
 import com.home.stock.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,13 +19,25 @@ import java.util.List;
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
+    private final CategoriaRepository categoriaRepository;
+
+    private Categoria buscarCategoria(String nome) {
+
+        return categoriaRepository.findByNomeIgnoreCase(nome)
+                .orElseThrow(() -> new CategoryNotFoundException(nome));
+    }
 
     private ProdutoResponse toResponse(Produto produto) {
+
+        CategoriaResponse categoriaResponse = new CategoriaResponse(
+                produto.getCategoria().getId(),
+                produto.getCategoria().getNome()
+        );
 
         return new ProdutoResponse(
                 produto.getId(),
                 produto.getNome(),
-                produto.getCategoria(),
+                produto.getCategoria().getNome(),
                 produto.getUnidadeMedida(),
                 produto.getEstoqueMinimo(),
                 produto.getQuantidadeEstoque()
@@ -30,10 +46,12 @@ public class ProdutoService {
 
     public ProdutoResponse criar(ProdutoRequest request) {
 
+        Categoria categoria = buscarCategoria(request.categoria());
+
         Produto produto = new Produto();
 
         produto.setNome(request.nome());
-        produto.setCategoria(request.categoria());
+        produto.setCategoria(categoria);
         produto.setUnidadeMedida(request.unidadeMedida());
         produto.setEstoqueMinimo(request.estoqueMinimo());
 
@@ -53,7 +71,7 @@ public class ProdutoService {
     public ProdutoResponse buscarPorId(Long id) {
 
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new ProdutoNotFoundException(id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
 
         return toResponse(produto);
     }
@@ -64,10 +82,12 @@ public class ProdutoService {
     ) {
 
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new ProdutoNotFoundException(id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
+
+        Categoria categoria = buscarCategoria(request.categoria());
 
         produto.setNome(request.nome());
-        produto.setCategoria(request.categoria());
+        produto.setCategoria(categoria);
         produto.setUnidadeMedida(request.unidadeMedida());
         produto.setEstoqueMinimo(request.estoqueMinimo());
 
@@ -79,7 +99,7 @@ public class ProdutoService {
     public void deletar(Long id) {
 
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new ProdutoNotFoundException(id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
 
         produtoRepository.delete(produto);
     }

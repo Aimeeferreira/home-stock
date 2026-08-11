@@ -1,6 +1,5 @@
 package com.home.stock.dto.request;
 
-import com.home.stock.entity.CategoriaProduto;
 import com.home.stock.entity.UnidadeMedida;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +15,7 @@ public record ProdutoRequest(
         String nome,
 
         @NotNull(message = "Categoria é obrigatória")
-        CategoriaProduto categoria,
+        String categoria,
 
         @NotNull(message = "Unidade de medida é obrigatória")
         UnidadeMedida unidadeMedida,
