@@ -1,7 +1,7 @@
-package com.family.stock.dto.request;
+package com.home.stock.dto.request;
 
-import com.family.stock.entity.CategoriaProduto;
-import com.family.stock.entity.UnidadeMedida;
+import com.home.stock.entity.CategoriaProduto;
+import com.home.stock.entity.UnidadeMedida;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;

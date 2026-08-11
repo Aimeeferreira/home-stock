@@ -1,4 +1,4 @@
-package com.family.stock.exception;
+package com.home.stock.exception;
 
 public class ProdutoNotFoundException extends RuntimeException {
 

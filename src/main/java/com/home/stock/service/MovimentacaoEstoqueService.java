@@ -1,14 +1,14 @@
-package com.family.stock.service;
+package com.home.stock.service;
 
-import com.family.stock.dto.request.MovimentacaoEstoqueRequest;
-import com.family.stock.dto.response.MovimentacaoEstoqueResponse;
-import com.family.stock.entity.MovimentacaoEstoque;
-import com.family.stock.entity.Produto;
-import com.family.stock.entity.TipoMovimentacao;
-import com.family.stock.exception.InsufficientStockException;
-import com.family.stock.exception.ProdutoNotFoundException;
-import com.family.stock.repository.MovimentacaoEstoqueRepository;
-import com.family.stock.repository.ProdutoRepository;
+import com.home.stock.dto.request.MovimentacaoEstoqueRequest;
+import com.home.stock.dto.response.MovimentacaoEstoqueResponse;
+import com.home.stock.entity.MovimentacaoEstoque;
+import com.home.stock.entity.Produto;
+import com.home.stock.entity.TipoMovimentacao;
+import com.home.stock.exception.InsufficientStockException;
+import com.home.stock.exception.ProdutoNotFoundException;
+import com.home.stock.repository.MovimentacaoEstoqueRepository;
+import com.home.stock.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

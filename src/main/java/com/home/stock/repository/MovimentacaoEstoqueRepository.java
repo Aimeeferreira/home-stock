@@ -1,7 +1,7 @@
-package com.family.stock.repository;
+package com.home.stock.repository;
 
-import com.family.stock.entity.MovimentacaoEstoque;
-import com.family.stock.entity.TipoMovimentacao;
+import com.home.stock.entity.MovimentacaoEstoque;
+import com.home.stock.entity.TipoMovimentacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

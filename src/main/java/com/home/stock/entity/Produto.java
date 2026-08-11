@@ -1,4 +1,4 @@
-package com.family.stock.entity;
+package com.home.stock.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
