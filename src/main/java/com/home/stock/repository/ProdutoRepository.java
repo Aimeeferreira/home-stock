@@ -1,6 +1,6 @@
-package com.family.stock.repository;
+package com.home.stock.repository;
 
-import com.family.stock.entity.Produto;
+import com.home.stock.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {

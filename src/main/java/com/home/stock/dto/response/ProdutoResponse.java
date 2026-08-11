@@ -1,7 +1,7 @@
-package com.family.stock.dto.response;
+package com.home.stock.dto.response;
 
-import com.family.stock.entity.CategoriaProduto;
-import com.family.stock.entity.UnidadeMedida;
+import com.home.stock.entity.CategoriaProduto;
+import com.home.stock.entity.UnidadeMedida;
 import java.math.BigDecimal;
 
 // Record representa um objeto imutável para transporte de dados

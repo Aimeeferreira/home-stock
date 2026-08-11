@@ -1,6 +1,6 @@
-package com.family.stock.exception;
+package com.home.stock.exception;
 
-import com.family.stock.entity.CategoriaProduto;
+import com.home.stock.entity.CategoriaProduto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

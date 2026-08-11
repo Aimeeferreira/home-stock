@@ -1,8 +1,8 @@
-package com.family.stock.controller;
+package com.home.stock.controller;
 
-import com.family.stock.dto.response.MovimentacaoEstoqueResponse;
-import com.family.stock.entity.TipoMovimentacao;
-import com.family.stock.service.MovimentacaoEstoqueService;
+import com.home.stock.dto.response.MovimentacaoEstoqueResponse;
+import com.home.stock.entity.TipoMovimentacao;
+import com.home.stock.service.MovimentacaoEstoqueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

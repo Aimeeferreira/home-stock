@@ -1,4 +1,4 @@
-package com.family.stock.dto.request;
+package com.home.stock.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

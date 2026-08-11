@@ -1,6 +1,6 @@
-package com.family.stock.dto.response;
+package com.home.stock.dto.response;
 
-import com.family.stock.entity.TipoMovimentacao;
+import com.home.stock.entity.TipoMovimentacao;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;

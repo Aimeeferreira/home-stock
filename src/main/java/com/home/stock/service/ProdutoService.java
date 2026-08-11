@@ -1,10 +1,10 @@
-package com.family.stock.service;
+package com.home.stock.service;
 
-import com.family.stock.dto.request.ProdutoRequest;
-import com.family.stock.dto.response.ProdutoResponse;
-import com.family.stock.entity.Produto;
-import com.family.stock.exception.ProdutoNotFoundException;
-import com.family.stock.repository.ProdutoRepository;
+import com.home.stock.dto.request.ProdutoRequest;
+import com.home.stock.dto.response.ProdutoResponse;
+import com.home.stock.entity.Produto;
+import com.home.stock.exception.ProdutoNotFoundException;
+import com.home.stock.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
