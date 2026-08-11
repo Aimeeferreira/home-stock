@@ -1,6 +1,5 @@
 package com.home.stock.exception;
 
-import com.home.stock.entity.CategoriaProduto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -9,14 +8,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Arrays;
+import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public java.util.List<ValidationErrorResponse> handleValidationException(
+    public List<ValidationErrorResponse> handleValidationException(
             MethodArgumentNotValidException exception
     ) {
         return exception.getBindingResult()
@@ -34,25 +33,8 @@ public class GlobalExceptionHandler {
     public InvalidFieldError handleMessageNotReadableException(
             HttpMessageNotReadableException exception
     ) {
-        String message = exception.getMessage();
-
-        if (message != null && message.contains("CategoriaProduto")) {
-
-            String rejectedValue = extractRejectedValue(message);
-
-            return new InvalidFieldError(
-                    400,
-                    "Categoria inválida",
-                    "categoria",
-                    rejectedValue,
-                    Arrays.stream(CategoriaProduto.values())
-                            .map(Enum::name)
-                            .toList()
-            );
-        }
-
         return new InvalidFieldError(
-                400,
+                HttpStatus.BAD_REQUEST.value(),
                 "Dados da requisição inválidos",
                 null,
                 null,
@@ -60,30 +42,23 @@ public class GlobalExceptionHandler {
         );
     }
 
-    private String extractRejectedValue(String message) {
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleProductNotFoundException(
+            ProductNotFoundException exception
+    ) {
+        ErrorResponse response = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                exception.getMessage()
+        );
 
-        String prefix = "from String \"";
-
-        int start = message.indexOf(prefix);
-
-        if (start == -1) {
-            return null;
-        }
-
-        start += prefix.length();
-
-        int end = message.indexOf("\"", start);
-
-        if (end == -1) {
-            return null;
-        }
-
-        return message.substring(start, end);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(response);
     }
 
-    @ExceptionHandler(ProdutoNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProdutoNotFoundException(
-            ProdutoNotFoundException exception
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleCategoryNotFound(
+            CategoryNotFoundException exception
     ) {
         ErrorResponse response = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),

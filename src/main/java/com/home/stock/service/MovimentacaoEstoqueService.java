@@ -6,7 +6,7 @@ import com.home.stock.entity.MovimentacaoEstoque;
 import com.home.stock.entity.Produto;
 import com.home.stock.entity.TipoMovimentacao;
 import com.home.stock.exception.InsufficientStockException;
-import com.home.stock.exception.ProdutoNotFoundException;
+import com.home.stock.exception.ProductNotFoundException;
 import com.home.stock.repository.MovimentacaoEstoqueRepository;
 import com.home.stock.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
@@ -76,7 +76,7 @@ public class MovimentacaoEstoqueService {
     private Produto buscarProduto(Long produtoId) {
 
         return produtoRepository.findById(produtoId)
-                .orElseThrow(() -> new ProdutoNotFoundException(produtoId));
+                .orElseThrow(() -> new ProductNotFoundException(produtoId));
     }
 
     private MovimentacaoEstoque registrarMovimentacao(

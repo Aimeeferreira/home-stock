@@ -20,8 +20,9 @@ public class Produto {
 
     private String nome;
 
-    @Enumerated(EnumType.STRING) //JPA armazena o nome do enum no banco, em vez da posição ordinal dele.
-    private CategoriaProduto categoria;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
 
     @Enumerated(EnumType.STRING)
     private UnidadeMedida unidadeMedida;
