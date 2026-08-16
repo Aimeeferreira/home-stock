@@ -108,17 +108,50 @@ public class MovimentacaoEstoqueService {
         );
     }
 
-    public List<MovimentacaoEstoqueResponse> listar(TipoMovimentacao tipo) {
+    public List<MovimentacaoEstoqueResponse> listar(
+            TipoMovimentacao tipo,
+            String produto,
+            String categoria,
+            LocalDateTime inicio,
+            LocalDateTime fim
+    ) {
 
-        List<MovimentacaoEstoque> movimentacoes;
+        return movimentacaoEstoqueRepository.findAll()
+                .stream()
 
-        if (tipo == null) {
-            movimentacoes = movimentacaoEstoqueRepository.findAll();
-        } else {
-            movimentacoes = movimentacaoEstoqueRepository.findByTipo(tipo);
-        }
+                .filter(movimentacao ->
+                        tipo == null ||
+                                movimentacao.getTipo() == tipo
+                )
 
-        return movimentacoes.stream()
+                .filter(movimentacao ->
+                        produto == null ||
+                                produto.isBlank() ||
+                                movimentacao.getProduto()
+                                        .getNome()
+                                        .toLowerCase()
+                                        .contains(produto.toLowerCase())
+                )
+
+                .filter(movimentacao ->
+                        categoria == null ||
+                                categoria.isBlank() ||
+                                movimentacao.getProduto()
+                                        .getCategoria()
+                                        .getNome()
+                                        .equalsIgnoreCase(categoria)
+                )
+
+                .filter(movimentacao ->
+                        inicio == null ||
+                                !movimentacao.getData().isBefore(inicio)
+                )
+
+                .filter(movimentacao ->
+                        fim == null ||
+                                !movimentacao.getData().isAfter(fim)
+                )
+
                 .map(this::toResponse)
                 .toList();
     }
