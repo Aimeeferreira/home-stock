@@ -23,7 +23,7 @@ public class ProdutoService {
 
     private Categoria buscarCategoria(String nome) {
 
-        return categoriaRepository.findByNomeIgnoreCase(nome)
+        return categoriaRepository.findByNome(nome)
                 .orElseThrow(() -> new CategoryNotFoundException(nome));
     }
 
@@ -60,10 +60,28 @@ public class ProdutoService {
         return toResponse(produtoSalvo);
     }
 
-    public List<ProdutoResponse> listar() {
+    public List<ProdutoResponse> listar(
+            String nome,
+            String categoria
+    ) {
 
-        return produtoRepository.findAll()
-                .stream()
+        List<Produto> produtos = produtoRepository.findAll();
+
+        return produtos.stream()
+                .filter(produto ->
+                        nome == null ||
+                                nome.isBlank() ||
+                                produto.getNome()
+                                        .toLowerCase()
+                                        .contains(nome.toLowerCase())
+                )
+                .filter(produto ->
+                        categoria == null ||
+                                categoria.isBlank() ||
+                                produto.getCategoria()
+                                        .getNome()
+                                        .equalsIgnoreCase(categoria)
+                )
                 .map(this::toResponse)
                 .toList();
     }

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -18,10 +19,20 @@ public class MovimentacaoEstoqueController {
 
     @GetMapping
     public ResponseEntity<List<MovimentacaoEstoqueResponse>> listar(
-            @RequestParam(required = false) TipoMovimentacao tipo
+            @RequestParam(required = false) TipoMovimentacao tipo,
+            @RequestParam(required = false) String produto,
+            @RequestParam(required = false) String categoria,
+            @RequestParam(required = false) LocalDateTime inicio,
+            @RequestParam(required = false) LocalDateTime fim
     ) {
         return ResponseEntity.ok(
-                movimentacaoEstoqueService.listar(tipo)
+                movimentacaoEstoqueService.listar(
+                        tipo,
+                        produto,
+                        categoria,
+                        inicio,
+                        fim
+                )
         );
     }
 }

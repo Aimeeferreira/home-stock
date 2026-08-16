@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -34,8 +35,13 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProdutoResponse>> listar() {
-        return ResponseEntity.ok(produtoService.listar());
+    public ResponseEntity<List<ProdutoResponse>> listar(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String categoria
+    ) {
+        return ResponseEntity.ok(
+                produtoService.listar(nome, categoria)
+        );
     }
 
     @GetMapping("/{id}")
